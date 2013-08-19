@@ -10,7 +10,7 @@ type Stack struct {
 }
 
 type Node struct {
-  value string
+  value interface{}
   next *Node
 }
 
@@ -22,16 +22,16 @@ func (s *Stack) IsEmpty() bool {
   return s.size == 0
 }
 
-func (s *Stack) Push(val string) {
+func (s *Stack) Push(val interface{}) {
   s.top = &Node{val, s.top}
   s.size++
 }
 
-func (s *Stack) Peek() string {
+func (s *Stack) Peek() interface{} {
   return s.top.value
 }
 
-func (s *Stack) Pop() (val string) {
+func (s *Stack) Pop() (val interface{}) {
   if s.size > 0 {
     val, s.top = s.top.value, s.top.next
     s.size--
@@ -43,8 +43,6 @@ func (s *Stack) Pop() (val string) {
 func main() {
   stack := new(Stack)
 
-  fmt.Println(stack.IsEmpty())
-
   stack.Push("Orr")
   stack.Push("It")
   stack.Push("Ship")
@@ -52,10 +50,8 @@ func main() {
   stack.Push("Michael")
   stack.Push("Zachary")
 
-  fmt.Println(stack.IsEmpty())
-
   for stack.Length() > 0 {
-    fmt.Printf("%s ", stack.Pop())
+    fmt.Printf("%s ", stack.Pop().(string))
   }
   fmt.Println()
 }
