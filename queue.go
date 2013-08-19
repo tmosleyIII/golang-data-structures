@@ -23,14 +23,15 @@ func (q *Queue) IsEmpty() bool {
 }
 
 func (q *Queue) Enqueue(val string) {
+  n := &Node{val, nil}
   if q.first == nil {
-    q.first = &Node{val, nil}
+    q.first = n
   } else {
     last := q.first
     for last.next != nil {
       last = last.next
     }
-    last.next = &Node{val, nil}
+    last.next = n
   }
   q.size++
 }
