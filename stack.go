@@ -19,10 +19,7 @@ func (s *Stack) Length() int {
 }
 
 func (s *Stack) IsEmpty() bool {
-  if s.size == 0 {
-    return true
-  }
-  return false
+  return s.size == 0
 }
 
 func (s *Stack) Push(val string) {
@@ -46,12 +43,16 @@ func (s *Stack) Pop() (val string) {
 func main() {
   stack := new(Stack)
 
+  fmt.Println(stack.IsEmpty())
+
   stack.Push("Orr")
   stack.Push("It")
   stack.Push("Ship")
   stack.Push("Scott")
   stack.Push("Michael")
   stack.Push("Zachary")
+
+  fmt.Println(stack.IsEmpty())
 
   for stack.Length() > 0 {
     fmt.Printf("%s ", stack.Pop())
