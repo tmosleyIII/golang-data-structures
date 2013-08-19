@@ -23,11 +23,15 @@ func (s *Stack) Push(val string) {
   s.size++
 }
 
+func (s *Stack) Peek() (val string) {
+  return s.top.value
+}
+
 func (s *Stack) Pop() (val string) {
   if s.size > 0 {
     val, s.top = s.top.value, s.top.next
     s.size--
-    return
+    return val
   }
   return ""
 }
