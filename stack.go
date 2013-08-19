@@ -18,6 +18,13 @@ func (s *Stack) Length() int {
   return s.size
 }
 
+func (s *Stack) IsEmpty() bool {
+  if s.size == 0 {
+    return true
+  }
+  return false
+}
+
 func (s *Stack) Push(val string) {
   s.top = &Node{val, s.top}
   s.size++
