@@ -10,7 +10,7 @@ type Queue struct {
 }
 
 type Node struct {
-  value string
+  value interface{}
   next *Node
 }
 
@@ -22,7 +22,7 @@ func (q *Queue) IsEmpty() bool {
   return q.size == 0
 }
 
-func (q *Queue) Enqueue(val string) {
+func (q *Queue) Enqueue(val interface{}) {
   n := &Node{val, nil}
   if q.first == nil {
     q.first, q.last = n, n
@@ -34,11 +34,11 @@ func (q *Queue) Enqueue(val string) {
   q.size++
 }
 
-func (q *Queue) Peek() string {
+func (q *Queue) Peek() interface{} {
   return q.first.value
 }
 
-func (q *Queue) Dequeue() (val string) {
+func (q *Queue) Dequeue() (val interface{}) {
   if q.size > 0 {
     val, q.first = q.first.value, q.first.next
     q.size--
@@ -61,7 +61,7 @@ func main() {
   queue.Enqueue("Orr")
 
   for queue.Length() > 0 {
-    fmt.Printf("%s ", queue.Dequeue())
+    fmt.Printf("%s ", queue.Dequeue().(string))
   }
   fmt.Println()
 }
