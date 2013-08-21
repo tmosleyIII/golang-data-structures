@@ -31,12 +31,12 @@ func (b *BinaryTree) Insert(val int) (n *Node) {
 }
 
 func (b *BinaryTree) insert(root *Node, parent *Node, val int) *Node {
-  if root == nil {
+  switch {
+  case root == nil:
     return addNode(parent, val)
-  }
-  if val <= root.value {
+  case val <= root.value:
     root.left = b.insert(root.left, root, val)
-  } else {
+  case val > root.value:
     root.right = b.insert(root.right, root, val)
   }
   return root
