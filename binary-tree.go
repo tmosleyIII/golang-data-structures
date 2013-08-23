@@ -1,6 +1,6 @@
 // To Do
 // -------
-// Add deletion
+// Make delete a little cleaner
 // Add traversal
 
 package main
@@ -42,14 +42,57 @@ func (b *BinaryTree) insert(root *Node, parent *Node, val int) *Node {
   return root
 }
 
+func (b *BinaryTree) Delete(val int) {
+  if b.root == nil {
+    return
+  } else {
+    b.delete(b.root, val)
+  }
+}
+
+func (b *BinaryTree) delete (root *Node, val int) (n *Node) {
+  if b.root.value == val && b.root.left == nil && b.root.right == nil {
+    n = b.root
+    b.root = nil
+    return
+  } else if root.value != val {
+    if val <= root.value {
+      b.delete(root.left, val)
+    } else if val > root.value {
+      b.delete(root.right, val)
+    }
+  } else if root.value == val && root.left == nil && root.right == nil {
+    n = b.root
+    b.root = nil
+    return
+  } else if root.value == val && (root.left == nil || root.right == nil) {
+    // there's a better, cleaner way to do this in one line
+    var n1 *Node
+    if root.left != nil {
+      n1 = root.left
+    } else {
+      n1 = root.right
+    }
+    switch {
+    case root.parent.left == root:
+      root.parent.left = n1
+      return root
+    case root.parent.right == root:
+      root.parent.right = n1
+      return root
+    } 
+  } else if root.value == val && root.left != nil && root.right != nil {
+    // Needs to be implemented later
+  }
+  return nil
+}
+
 func main() {
   b := new(BinaryTree)
-  fmt.Println(b.root)
   b.Insert(0)
-  fmt.Println(b.root)
   b.Insert(1)
   b.Insert(-1)
   fmt.Println(b.root)
-  fmt.Println(b.root.right)
-  fmt.Println(b.root.left)
+  b.Delete(1)
+  fmt.Println(b.root)
 }
